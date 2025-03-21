@@ -275,7 +275,7 @@ export const projects = [
     description:
       "Developed a comprehensive platform using Next.js to streamline scholarship applications, reviews, and approvals, enhancing accessibility for students and administrators.",
     image:
-      "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Next.js", "Node.js", "Web Development", "Education"],
     category: "web app",
     github: "https://github.com/shadil-rayyan/ScholarshipMangementSystem",
