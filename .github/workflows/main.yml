@@ -1,35 +1,34 @@
-name: React App Workflow
+name: Deploy React App to GitHub Pages
 
-# Trigger the workflow on push to the master branch or on pull request to the master branch
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - master
+      - master # Deploy only on pushes to the master branch
+
+permissions:
+  contents: write # Required to push to gh-pages
 
 jobs:
-  build-and-start:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # Checkout the repository's code
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    # Set up the Node.js environment
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: '14' # Specify your project's Node.js version
+        node-version: 18 # Use latest stable Node.js version
 
-    # Install dependencies
     - name: Install dependencies
       run: npm install
 
-    # Start the React app
-    - name: Start the React app
-      run: npm start
+    - name: Build React app
+      run: npm run build
 
-    # Add additional steps as needed, such as testing or deploying
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages  # Deploy to the 'gh-pages' branch
+        folder: build      # The folder that contains the built React app
