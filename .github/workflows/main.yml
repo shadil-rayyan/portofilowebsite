@@ -3,7 +3,10 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - master  # Ensure your main branch is correctly named
+
+permissions:
+  contents: write  # Grants write access to the repository
 
 jobs:
   build-and-deploy:
