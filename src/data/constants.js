@@ -298,8 +298,7 @@ export const projects = [
     title: "GECian Archive",
     description:
       "Developed a dedicated platform for GEC Palakkad students to showcase and archive their projects, fostering a culture of collaboration and innovation within the institution.",
-      image: "/project/gecianarchive.png",
-
+      image: "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Next.js", "Node.js", "Web Development", "Education"],
     category: "web app",
     github: "https://github.com/CodeCompasss/gecian_archive",
@@ -311,7 +310,7 @@ export const projects = [
     description:
       "Developed a Telegram bot to guide users to authentic dishes and restaurants in Kozhikode city, enhancing culinary exploration for locals and tourists alike.",
     image:
-      "https://example.com/kerala_food_spot_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Python", "Telebot", "Telegram", "Culinary"],
     category: "Bots and Packages",
     github: "https://github.com/rishavchanda/Podstreamkk",
@@ -322,7 +321,7 @@ export const projects = [
     description:
       "Created a platform to highlight famous and hidden tourist spots in Kerala, providing travelers with curated information to enrich their travel experiences.",
     image:
-      "https://example.com/kerala_tourist_spot_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Python", "Telebot", "Telegram", "Travel"],
     category: "Bots and Packages",
     github: "https://github.com/rishavchanda/Project-Management-App",
@@ -334,7 +333,7 @@ export const projects = [
     description:
       "Developed a vibrant food blog platform as part of the StackUp challenge by TinkerHub, enabling food enthusiasts to share recipes, reviews, and culinary stories.",
     image:
-      "https://example.com/food_blog_website_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Next.js", "Node.js", "Web Development", "Blogging"],
     category: "web app",
     github: "https://github.com/shadil-rayyan/cs-108_StackUp",
@@ -347,7 +346,7 @@ export const projects = [
     description:
       "Developed an NPM package that efficiently determines if a number is a power of 2, providing developers with a reliable utility for mathematical computations.",
     image:
-      "https://example.com/check_power_of_2_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Node.js", "NPM", "Mathematics", "Utility"],
     category: "Bots and Packages",
     github: "https://github.com/shadil-rayyan/check_power_of_two_npm_package",
@@ -359,7 +358,7 @@ export const projects = [
     description:
       "Customized an HTML template to create a professional website for Nemini Electric, enhancing their online presence and accessibility to customers.",
     image:
-      "https://example.com/nemini_electric_website_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["HTML", "CSS", "Web Development", "Business"],
     category: "web app",
     github: "https://github.com/shadil-rayyan/nenmini-electric_website",
@@ -372,7 +371,7 @@ export const projects = [
     description:
       "Implemented a machine learning model to predict laptop prices based on specifications, following a YouTube tutorial to enhance my ML skills.",
     image:
-      "https://example.com/laptop_price_predictor_image.png",
+    "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
     tags: ["Streamlit", "Machine Learning", "Web Development", "Data Science"],
     category: "machine learning",
     github: 
@@ -383,7 +382,8 @@ export const projects = [
      title:"Ethical Hacking Guide" ,
      date:"Dec 2021 - Apr 2022" ,
      description:"Compiled a repository containing curated videos and concise notes to facilitate learning in ethical hacking, developed under the cybersecurity club." ,
-     image:"https://example.com/ethical_hacking_guide_image.png" ,
+     image:
+     "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
      tags:["Cybersecurity","Education","Resources","Ethical Hacking"] ,
      category:"Bots and Packages" ,
      github:"https://github.com/shadil-rayyan/EthicalHackingGuide" ,
@@ -393,7 +393,8 @@ export const projects = [
      title:"Face Shape Predictor" ,
      date:"Dec2021 - Apr2022" ,
      description:"Developed a machine learning model to predict face shapes, enhancing applications in personalized recommendations and virtual try-on systems." ,
-     image:"geciaarchive.png" ,
+     image:
+     "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
      tags:["Streamlit","machine learning","Computer Vision","AI"] ,
      category:"machine learning" ,
      github:"https://github.com/shadil-rayyan/face-shape-detector" ,
@@ -403,6 +404,8 @@ export const projects = [
      title:"Tech Expert" ,
      date:"Dec2021 - Apr2022" ,
      description:"Developed a Telegram bot that actively shares great tech deals during sales festivals, assisting users in making informed purchasing decisions." ,
+     image:
+     "https://user-images.githubusercontent.com/64485885/234602896-a1bd8bcc-b72b-4821-83d6-8ad885bf435e.png", // Updated image link
      tags:["Python","Telegram Bot","E-commerce","Deals"] ,
      category:"Bots and Packages" ,
      github:"",
