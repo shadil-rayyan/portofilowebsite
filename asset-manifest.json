@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/shadil-rayyan/portofilowebsite/static/css/main.bf538fe7.css",
-    "main.js": "/shadil-rayyan/portofilowebsite/static/js/main.838aec48.js",
+    "main.js": "/shadil-rayyan/portofilowebsite/static/js/main.ddfb2110.js",
     "static/media/HeroImage.jpg": "/shadil-rayyan/portofilowebsite/static/media/HeroImage.6d0926c3c885370b487b.jpg",
     "index.html": "/shadil-rayyan/portofilowebsite/index.html",
     "main.bf538fe7.css.map": "/shadil-rayyan/portofilowebsite/static/css/main.bf538fe7.css.map",
-    "main.838aec48.js.map": "/shadil-rayyan/portofilowebsite/static/js/main.838aec48.js.map"
+    "main.ddfb2110.js.map": "/shadil-rayyan/portofilowebsite/static/js/main.ddfb2110.js.map"
   },
   "entrypoints": [
     "static/css/main.bf538fe7.css",
-    "static/js/main.838aec48.js"
+    "static/js/main.ddfb2110.js"
   ]
 }
