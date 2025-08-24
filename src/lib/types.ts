@@ -11,4 +11,5 @@ export interface Project {
   category: string;
   github?: string;
   webapp?: string;
+  video?: string;
 }

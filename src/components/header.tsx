@@ -5,32 +5,15 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
 import heroData from "@/data/hero.json";
 
-const navLinks = [
-  { href: "#education", label: "Education" },
-  { href: "#skills", label: "Skills" },
-  { href: "/projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
-
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 items-center px-4">
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Code className="h-6 w-6 text-primary" />
-          <span className="font-bold">DevFolio</span>
+          <span className="font-bold">Shadil AM</span>
         </Link>
-        <nav className="hidden flex-1 items-center space-x-6 text-sm font-medium md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-muted-foreground transition-colors hover:text-primary"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        
         <div className="flex flex-1 items-center justify-end space-x-4">
           <div className="hidden md:flex items-center gap-2">
             <Button asChild>
@@ -55,17 +38,8 @@ export function Header() {
               <nav className="grid gap-6 text-lg font-medium mt-8">
                 <Link href="/" className="flex items-center gap-2 text-lg font-semibold mb-4">
                   <Code className="h-6 w-6 text-primary" />
-                  <span>DevFolio</span>
+                  <span>Shadil AM</span>
                 </Link>
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
                 <div className="flex flex-col gap-4 mt-4">
                     <Button asChild>
                         <Link href={heroData.resume} target="_blank">Resume</Link>

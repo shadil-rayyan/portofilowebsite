@@ -10,22 +10,11 @@ import { ArrowLeft, Github, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Project } from "@/lib/types";
 import allProjects from "@/data/projects.json";
-import * as fs from 'fs';
-import * as path from 'path';
 
-// This is a mock function, in a real scenario this would fetch from a file system or API
 async function getProjectDetails(slug: string): Promise<Project | undefined> {
     try {
-        // Since we can't use fs in the browser, we'll simulate fetching
-        // For the purpose of this component, we will find the project in the main projects.json
-        // and assume the long description is there.
         const project = allProjects.find(p => p.slug === slug);
         if (!project) return undefined;
-        
-        // In a real Node.js environment, you would do this:
-        // const filePath = path.join(process.cwd(), 'src', 'data', 'projects', `${slug}.json`);
-        // const fileContent = fs.readFileSync(filePath, 'utf-8');
-        // return JSON.parse(fileContent);
         
         // Mocking the long description fetch
         const details = await import(`@/data/projects/${slug}.json`);
@@ -110,13 +99,24 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
             )}
           </div>
           <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
-            <Image
-              src={project.image}
-              alt={`Hero image for ${project.title}`}
-              fill
-              className="object-cover"
-              data-ai-hint={project.imageHint}
-            />
+            {project.video ? (
+                <video
+                    src={project.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="object-cover w-full h-full"
+                />
+            ) : (
+                <Image
+                src={project.image}
+                alt={`Hero image for ${project.title}`}
+                fill
+                className="object-cover"
+                data-ai-hint={project.imageHint}
+                />
+            )}
           </div>
           <div className="prose prose-lg dark:prose-invert max-w-none mx-auto text-foreground/80 mb-12">
             <p>{project.longDescription}</p>
