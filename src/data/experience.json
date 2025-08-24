@@ -1,0 +1,31 @@
+
+[
+  {
+    "id": 1,
+    "img": "https://images.crunchbase.com/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/gwnfuh4klq26d5p5h8ag",
+    "role": "Softwere developer",
+    "company": "zendalona",
+    "date": "June 2023 - present",
+    "desc": "Working on various project for the visual imparied ",
+    "skills": [
+      "ReactJS",
+      "Redux",
+      "NodeJs",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Docker",
+      "jenkins",
+      "postreSql"
+    ]
+  },
+  {
+    "id": 2,
+    "img": "https://images.crunchbase.com/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/gwnfuh4klq26d5p5h8ag",
+    "role": "office administer ",
+    "company": "vland consulting and service",
+    "date": "june 2022 - oct 2022 ",
+    "desc": "i worked on many application related to akshaya service and my other job was to fix if anything goes wrong with the computer,wifi router and printer",
+    "skills": ["team working","IT skills"]
+  }
+]
