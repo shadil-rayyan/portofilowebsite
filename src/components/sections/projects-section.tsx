@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Github } from "lucide-react";
@@ -26,9 +25,9 @@ export function ProjectsSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {featuredProjects.map((project: Project) => (
             <Card key={project.slug} className="project-card-border flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                <CardHeader className="p-0">
-                  <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
-                    {project.video && (
+                {project.video && (
+                  <CardHeader className="p-0">
+                    <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
                         <video
                             src={project.video}
                             autoPlay
@@ -37,9 +36,9 @@ export function ProjectsSection() {
                             playsInline
                             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                         />
-                    )}
-                  </Link>
-                </CardHeader>
+                    </Link>
+                  </CardHeader>
+                )}
                 <CardContent className="p-6 flex-grow">
                 <CardTitle className="mb-2">
                     <Link href={`/projects/${project.slug}`} className="hover:text-primary transition-colors">{project.title}</Link>

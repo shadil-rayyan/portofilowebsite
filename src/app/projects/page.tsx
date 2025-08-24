@@ -41,9 +41,9 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project: Project) => (
               <Card key={project.slug} className="project-card-border flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                <CardHeader className="p-0">
-                  <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
-                    {project.video && (
+                {project.video && (
+                  <CardHeader className="p-0">
+                    <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
                         <video
                             src={project.video}
                             autoPlay
@@ -52,9 +52,9 @@ export default function ProjectsPage() {
                             playsInline
                             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                         />
-                    )}
-                  </Link>
-                </CardHeader>
+                    </Link>
+                  </CardHeader>
+                )}
                 <CardContent className="p-6 flex-grow">
                   <CardTitle className="mb-2">
                     <Link href={`/projects/${project.slug}`} className="hover:text-primary transition-colors">{project.title}</Link>
