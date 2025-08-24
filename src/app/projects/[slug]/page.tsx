@@ -9,11 +9,34 @@ import Link from "next/link";
 import { ArrowLeft, Github, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Project } from "@/lib/types";
-import allProjectsData from "@/data/projects.json";
+import allProjects from "@/data/projects.json";
+import * as fs from 'fs';
+import * as path from 'path';
 
-function getProject(slug: string): Project | undefined {
-  return allProjectsData.find(p => p.slug === slug);
+// This is a mock function, in a real scenario this would fetch from a file system or API
+async function getProjectDetails(slug: string): Promise<Project | undefined> {
+    try {
+        // Since we can't use fs in the browser, we'll simulate fetching
+        // For the purpose of this component, we will find the project in the main projects.json
+        // and assume the long description is there.
+        const project = allProjects.find(p => p.slug === slug);
+        if (!project) return undefined;
+        
+        // In a real Node.js environment, you would do this:
+        // const filePath = path.join(process.cwd(), 'src', 'data', 'projects', `${slug}.json`);
+        // const fileContent = fs.readFileSync(filePath, 'utf-8');
+        // return JSON.parse(fileContent);
+        
+        // Mocking the long description fetch
+        const details = await import(`@/data/projects/${slug}.json`);
+        return { ...project, ...details };
+
+    } catch (error) {
+        console.error("Could not fetch project details for slug:", slug, error);
+        return undefined;
+    }
 }
+
 
 export default function ProjectDetailsPage({ params }: { params: { slug: string } }) {
   const [project, setProject] = useState<Project | null>(null);
@@ -21,19 +44,23 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const fetchedProject = getProject(params.slug);
-      if (fetchedProject) {
-        setProject(fetchedProject);
-      } else {
-        setError("Project not found.");
+    const fetchProject = async () => {
+      try {
+        const fetchedProject = await getProjectDetails(params.slug);
+        if (fetchedProject) {
+          setProject(fetchedProject);
+        } else {
+          setError("Project not found.");
+        }
+      } catch (e) {
+        console.error("Failed to fetch project", e);
+        setError("Failed to load project data.");
+      } finally {
+        setIsLoading(false);
       }
-    } catch (e) {
-      console.error("Failed to fetch project", e);
-      setError("Failed to load project data.");
-    } finally {
-      setIsLoading(false);
-    }
+    };
+
+    fetchProject();
   }, [params.slug]);
 
 
@@ -73,9 +100,9 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
                 </Badge>
               ))}
             </div>
-            {project.githubLink && (
+            {project.github && (
               <Button asChild variant="outline" size="sm">
-                <Link href={project.githubLink} target="_blank">
+                <Link href={project.github} target="_blank">
                   <Github className="mr-2 h-4 w-4" />
                   View on GitHub
                 </Link>

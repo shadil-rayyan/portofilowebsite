@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Code, Database, Smartphone, Server } from "lucide-react";
-import skillsData from '@/data/skills.json';
+import skillsData from '@/data/what-i-do.json';
 
 const icons = {
     Code: <Code className="w-8 h-8 text-primary" />,

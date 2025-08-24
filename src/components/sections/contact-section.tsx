@@ -19,6 +19,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import contactData from "@/data/contact.json";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -108,14 +109,14 @@ export function ContactSection() {
         <div className="space-y-6">
             <h3 className="text-xl font-semibold">Contact Information</h3>
             <p className="text-muted-foreground">
-                I'm open to new opportunities and collaborations. Feel free to reach out via email or connect with me on LinkedIn.
+                {contactData.description}
             </p>
             <div className="space-y-4">
-                <Link href="mailto:hello@example.com" className="flex items-center gap-3 group">
+                <Link href={`mailto:${contactData.email}`} className="flex items-center gap-3 group">
                     <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-muted-foreground group-hover:text-primary transition-colors">hello@example.com</span>
+                    <span className="text-muted-foreground group-hover:text-primary transition-colors">{contactData.email}</span>
                 </Link>
-                <Link href="https://linkedin.com/in/#" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                <Link href={contactData.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                     <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-muted-foreground group-hover:text-primary transition-colors">LinkedIn Profile</span>
                 </Link>

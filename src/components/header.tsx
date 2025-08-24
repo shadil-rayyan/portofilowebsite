@@ -3,6 +3,7 @@ import { Code, Github, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
+import heroData from "@/data/hero.json";
 
 const navLinks = [
   { href: "#education", label: "Education" },
@@ -12,9 +13,6 @@ const navLinks = [
 ];
 
 export function Header() {
-  const resumeLink = "https://drive.google.com/file/d/1ffZrcMcn8UatXGIaautbbqpV7ADNhhhgggggaETA/view?usp=sharing";
-  const githubLink = "https://github.com/Shadil-rayyan";
-
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-14 items-center px-4">
@@ -36,10 +34,10 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <div className="hidden md:flex items-center gap-2">
             <Button asChild>
-                <Link href={resumeLink} target="_blank">Resume</Link>
+                <Link href={heroData.resume} target="_blank">Resume</Link>
             </Button>
             <Button asChild variant="secondary">
-                <Link href={githubLink} target="_blank">
+                <Link href={heroData.github} target="_blank">
                     <Github className="h-4 w-4 mr-2" />
                     GitHub
                 </Link>
@@ -70,10 +68,10 @@ export function Header() {
                 ))}
                 <div className="flex flex-col gap-4 mt-4">
                     <Button asChild>
-                        <Link href={resumeLink} target="_blank">Resume</Link>
+                        <Link href={heroData.resume} target="_blank">Resume</Link>
                     </Button>
                     <Button asChild variant="secondary">
-                        <Link href={githubLink} target="_blank">
+                        <Link href={heroData.github} target="_blank">
                             <Github className="h-4 w-4 mr-2" />
                             GitHub
                         </Link>

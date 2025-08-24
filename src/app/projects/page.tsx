@@ -43,7 +43,7 @@ export default function ProjectsPage() {
             {filteredProjects.map((project: Project) => (
               <Card key={project.slug} className="flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl transform-gpu hover:-translate-y-2 hover:rotate-x-4 hover:rotate-y-4" style={{ transformStyle: "preserve-3d" }}>
                 <CardHeader className="p-0">
-                  <Link href={project.link} className="block relative h-48 w-full overflow-hidden">
+                  <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden">
                     <Image
                       src={project.image}
                       alt={`Screenshot of ${project.title}`}
@@ -55,24 +55,13 @@ export default function ProjectsPage() {
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">
                   <CardTitle className="mb-2">
-                    <Link href={project.link} className="hover:text-primary transition-colors">{project.title}</Link>
+                    <Link href={`/projects/${project.slug}`} className="hover:text-primary transition-colors">{project.title}</Link>
                   </CardTitle>
                   <CardDescription>{project.description}</CardDescription>
                 </CardContent>
                 <CardFooter className="p-6 pt-0 flex flex-col items-start gap-4">
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
-                  </div>
-                  <div className="flex items-center gap-4 mt-2">
-                    <Button asChild>
-                      <Link href={project.link}>Read More</Link>
-                    </Button>
-                    <Button asChild variant="outline">
-                      <Link href={project.githubLink} target="_blank">
-                        <Github className="mr-2 h-4 w-4" />
-                        GitHub
-                      </Link>
-                    </Button>
                   </div>
                 </CardFooter>
               </Card>

@@ -10,13 +10,16 @@ import {
 } from "@/components/ui/card";
 import { GraduationCap } from "lucide-react";
 import educationData from '@/data/education.json';
+import Image from "next/image";
 
 interface EducationEntry {
-  id: string;
+  id: number;
+  img: string;
+  school: string;
+  date: string;
+  grade: string;
+  desc: string;
   degree: string;
-  institution: string;
-  period: string;
-  description: string;
 }
 
 export function EducationSection() {
@@ -30,16 +33,16 @@ export function EducationSection() {
               <div className="flex items-start justify-between">
                 <div>
                   <CardTitle>{edu.degree}</CardTitle>
-                  <CardDescription className="pt-1">{edu.institution}</CardDescription>
+                  <CardDescription className="pt-1">{edu.school}</CardDescription>
                 </div>
                 <div className="p-2 bg-primary/10 rounded-full">
-                  <GraduationCap className="w-6 h-6 text-primary" />
+                  <Image src={edu.img} alt={edu.school} width={40} height={40} className="rounded-full" />
                 </div>
               </div>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p className="text-sm text-muted-foreground mb-4">{edu.period}</p>
-              <p className="text-foreground/80">{edu.description}</p>
+              <p className="text-sm text-muted-foreground mb-4">{edu.date} • {edu.grade}</p>
+              <p className="text-foreground/80">{edu.desc}</p>
             </CardContent>
           </Card>
         ))}

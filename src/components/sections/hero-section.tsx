@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import heroData from '@/data/hero.json';
+import { Typewriter } from 'react-simple-typewriter';
 
 export function HeroSection() {
   return (
@@ -13,8 +14,19 @@ export function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter">
-              {heroData.headline}
+              Hi, I'm {heroData.name}
             </h1>
+            <div className="text-2xl md:text-3xl text-primary font-semibold h-10">
+              <Typewriter
+                words={heroData.roles}
+                loop={0}
+                cursor
+                cursorStyle='_'
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </div>
             <p className="text-lg md:text-xl text-muted-foreground">
               {heroData.description}
             </p>

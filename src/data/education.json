@@ -1,24 +1,30 @@
 
 [
   {
-    "id": "0",
-    "degree": "Bachelor of Technology - BTech, Computer Science and Engineering",
-    "institution": "Government Enginerring college sreekrishnapuram",
-    "period": "Oct 2022 - jun 2026",
-    "description": "I am currently pursuing a Bachelor's degree in Computer Science and Engineering at Gec Skp. I have completed 4 semesters and have a CGPA of 7.36. I have taken courses in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks, among others."
+    "id": 0,
+    "img": "https://upload.wikimedia.org/wikipedia/en/7/72/Gec_Sreekrishnapuram_Logo.png",
+    "school": "Government Enginerring college sreekrishnapuram",
+    "date": "Oct 2022 - jun 2026",
+    "grade": "7.36 CGPA",
+    "desc": "I am currently pursuing a Bachelor's degree in Computer Science and Engineering at Gec Skp. I have completed 4 semesters and have a CGPA of 7.36. I have taken courses in Data Structures, Algorithms, Object-Oriented Programming, Database Management Systems, Operating Systems, and Computer Networks, among others.",
+    "degree": "Bachelor of Technology - BTech, Computer Science and Engineering"
   },
   {
-    "id": "1",
-    "degree": "higher secondary school certificate",
-    "institution": "Thirunvangoor higher secondary school",
-    "period": "Apr 2020 - Mar 2022",
-    "description": "I completed my class 12 high school education at Thirunvangoor School, Dankuni, where I studied Science with PCMB."
+    "id": 1,
+    "img": "https://th.bing.com/th/id/OIP.CAyp94vtVjpVXmyX6568dwAAAA?rs=1&pid=ImgDetMain",
+    "school": "Thirunvangoor higher secondary school",
+    "date": "Apr 2020 - Mar 2022",
+    "grade": "95.5%",
+    "desc": "I completed my class 12 high school education at Thirunvangoor School, Dankuni, where I studied Science with PCMB.",
+    "degree": "higher secondary school certificate"
   },
   {
-    "id": "2",
-    "degree": "secondary school leaving certificate",
-    "institution": "Thirunvangoor higher secondary school",
-    "period": "Apr 2019 - Apr 2020",
-    "description": "I completed my class 10 education at Thirunvangoor School, kerala, where I studied Science with Computer Application."
+    "id": 2,
+    "img": "https://th.bing.com/th/id/OIP.CAyp94vtVjpVXmyX6568dwAAAA?rs=1&pid=ImgDetMain",
+    "school": "Thirunvangoor higher secondary school",
+    "date": "Apr 2019 - Apr 2020",
+    "grade": "98%",
+    "desc": "I completed my class 10 education at Thirunvangoor School, kerala, where I studied Science with Computer Application.",
+    "degree": "secondary school leaving certificate"
   }
 ]

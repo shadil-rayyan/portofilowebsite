@@ -1,14 +1,14 @@
 
 export interface Project {
-  id?: string;
+  id: string;
   slug: string;
   title: string;
   description: string;
-  longDescription: string;
+  longDescription?: string;
   image: string;
   imageHint: string;
-  link: string;
-  githubLink: string;
   tags: string[];
   category: string;
+  github?: string;
+  webapp?: string;
 }

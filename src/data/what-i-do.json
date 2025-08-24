@@ -1,0 +1,27 @@
+
+[
+    {
+      "id": "1",
+      "icon": "Code",
+      "title": "Frontend Development",
+      "description": "Building responsive user interfaces with React, Redux, and Next.js."
+    },
+    {
+      "id": "2",
+      "icon": "Server",
+      "title": "Backend Development",
+      "description": "Creating robust APIs and server-side applications with Node.js and Express."
+    },
+    {
+      "id": "3",
+      "icon": "Database",
+      "title": "Database Management",
+      "description": "Working with SQL and NoSQL databases like MySQL, PostgreSQL, and MongoDB."
+    },
+    {
+        "id": "4",
+        "icon": "Smartphone",
+        "title": "Android Development",
+        "description": "Developing native Android applications using Java, Kotlin, and Android Studio."
+    }
+]
