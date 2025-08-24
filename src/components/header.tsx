@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Code, Menu } from "lucide-react";
+import { Code, Github, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "./theme-toggle";
 
 const navLinks = [
   { href: "#education", label: "Education" },
@@ -30,6 +31,18 @@ export function Header() {
           ))}
         </nav>
         <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="hidden md:flex items-center gap-2">
+            <Button asChild>
+                <Link href="/resume.pdf" target="_blank">Resume</Link>
+            </Button>
+            <Button asChild variant="secondary">
+                <Link href="#" target="_blank">
+                    <Github className="h-4 w-4 mr-2" />
+                    GitHub
+                </Link>
+            </Button>
+          </div>
+          <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -39,9 +52,9 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <nav className="grid gap-6 text-lg font-medium mt-8">
-                <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
+                <Link href="/" className="flex items-center gap-2 text-lg font-semibold mb-4">
                   <Code className="h-6 w-6 text-primary" />
-                  <span className="sr-only">DevFolio</span>
+                  <span>DevFolio</span>
                 </Link>
                 {navLinks.map((link) => (
                   <Link
@@ -52,6 +65,17 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <div className="flex flex-col gap-4 mt-4">
+                    <Button asChild>
+                        <Link href="/resume.pdf" target="_blank">Resume</Link>
+                    </Button>
+                    <Button asChild variant="secondary">
+                        <Link href="#" target="_blank">
+                            <Github className="h-4 w-4 mr-2" />
+                            GitHub
+                        </Link>
+                    </Button>
+                </div>
               </nav>
             </SheetContent>
           </Sheet>
