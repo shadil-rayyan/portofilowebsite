@@ -42,10 +42,23 @@ export function ProjectsSection() {
                     <Link href={`/projects/${project.slug}`} className="hover:text-primary transition-colors">{project.title}</Link>
                 </CardTitle>
                 <CardDescription>{project.description}</CardDescription>
+                <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+                </div>
                 </CardContent>
-                <CardFooter className="p-6 pt-0 flex flex-col items-start gap-4">
-                    <div className="flex flex-wrap gap-2">
-                        {project.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+                <CardFooter className="p-6 pt-0">
+                    <div className="flex items-center gap-4">
+                        <Button asChild>
+                            <Link href={`/projects/${project.slug}`}>View Project</Link>
+                        </Button>
+                        {project.github && (
+                            <Button asChild variant="secondary">
+                                <Link href={project.github} target="_blank">
+                                    <Github className="h-4 w-4 mr-2" />
+                                    GitHub
+                                </Link>
+                            </Button>
+                        )}
                     </div>
                 </CardFooter>
             </Card>
