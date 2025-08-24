@@ -23,107 +23,18 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Github } from "lucide-react";
+import { allProjectsData } from "@/lib/projects-data";
+import { BackToTop } from "@/components/back-to-top";
 
-const allProjects = [
-  {
-    slug: "ecommerce-platform",
-    title: "E-commerce Platform",
-    description: "A full-featured e-commerce site built with Next.js, Stripe for payments, and a custom CMS for product management.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "online store",
-    link: "/projects/ecommerce-platform",
-    githubLink: "#",
-    tags: ["Next.js", "React", "Stripe", "Tailwind CSS"],
-    category: "Web",
-  },
-  {
-    slug: "data-visualization-dashboard",
-    title: "Data Visualization Dashboard",
-    description: "An interactive dashboard for visualizing complex datasets using D3.js and React, enabling real-time data exploration.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "data dashboard",
-    link: "/projects/data-visualization-dashboard",
-    githubLink: "#",
-    tags: ["React", "D3.js", "Node.js", "Express"],
-    category: "Web",
-  },
-  {
-    slug: "ai-content-generator",
-    title: "AI-Powered Content Generator",
-    description: "A web app that leverages generative AI to create marketing copy and blog posts, built with Python, Flask, and a React frontend.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "artificial intelligence",
-    link: "/projects/ai-content-generator",
-    githubLink: "#",
-    tags: ["Python", "Flask", "React", "AI"],
-    category: "AI",
-  },
-  {
-    slug: "mobile-fitness-app",
-    title: "Mobile Fitness App",
-    description: "A cross-platform mobile app for tracking workouts and nutrition, built with React Native and Firebase.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "fitness app",
-    link: "/projects/mobile-fitness-app",
-    githubLink: "#",
-    tags: ["React Native", "Firebase", "iOS", "Android"],
-    category: "Mobile",
-  },
-  {
-    slug: "project-management-tool",
-    title: "Project Management Tool",
-    description: "A collaborative tool for teams to manage tasks, projects, and deadlines, featuring a real-time Kanban board.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "kanban board",
-    link: "/projects/project-management-tool",
-    githubLink: "#",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    category: "Web",
-  },
-  {
-    slug: "iot-smart-home-system",
-    title: "IoT Smart Home System",
-    description: "A system to control smart home devices from a central dashboard, using Raspberry Pi, Node.js, and MQTT.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "smart home",
-    link: "/projects/iot-smart-home-system",
-    githubLink: "#",
-    tags: ["IoT", "Raspberry Pi", "Node.js", "MQTT"],
-    category: "IoT",
-  },
-  {
-    slug: "recipe-sharing-app",
-    title: "Recipe Sharing App",
-    description: "A social platform for users to share and discover new recipes, with features like meal planning and shopping lists.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "food recipe",
-    link: "/projects/recipe-sharing-app",
-    githubLink: "#",
-    tags: ["Vue.js", "Firebase", "Vuetify"],
-    category: "Web",
-  },
-  {
-    slug: "ar-navigation-app",
-    title: "AR Navigation App",
-    description: "An augmented reality mobile app that overlays navigation directions onto the real world view from the phone's camera.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "augmented reality",
-    link: "/projects/ar-navigation-app",
-    githubLink: "#",
-    tags: ["ARKit", "Swift", "CoreLocation"],
-    category: "Mobile",
-  },
-];
-
-const categories = ["All", ...Array.from(new Set(allProjects.map(p => p.category)))];
+const categories = ["All", ...Array.from(new Set(allProjectsData.map(p => p.category)))];
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState("All");
 
   const filteredProjects =
     filter === "All"
-      ? allProjects
-      : allProjects.filter((project) => project.category === filter);
+      ? allProjectsData
+      : allProjectsData.filter((project) => project.category === filter);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -152,21 +63,21 @@ export default function ProjectsPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <Card key={project.slug} className="flex flex-col overflow-hidden group transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+              <Card key={project.slug} className="flex flex-col overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-xl">
                 <CardHeader className="p-0">
                   <Link href={project.link} className="block relative h-48 w-full overflow-hidden">
                     <Image
                       src={project.image}
                       alt={`Screenshot of ${project.title}`}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
                       data-ai-hint={project.imageHint}
                     />
                   </Link>
                 </CardHeader>
                 <CardContent className="p-6 flex-grow">
                   <CardTitle className="mb-2">
-                    <Link href={project.link}>{project.title}</Link>
+                    <Link href={project.link} className="hover:text-primary transition-colors">{project.title}</Link>
                   </CardTitle>
                   <CardDescription>{project.description}</CardDescription>
                 </CardContent>
@@ -192,6 +103,7 @@ export default function ProjectsPage() {
         </div>
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

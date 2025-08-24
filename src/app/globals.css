@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer base {
@@ -14,13 +14,13 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 180 100% 25.1%;
+    --primary: 180 100% 25.1%; /* Teal */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
+    --accent: 0 0% 82.7%; /* Light Gray */
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -43,20 +43,20 @@ body {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 0 0% 13%;
+    --background: 0 0% 13.3%; /* Dark Gray */
     --foreground: 0 0% 83%;
     --card: 0 0% 16%;
     --card-foreground: 0 0% 83%;
     --popover: 0 0% 13%;
     --popover-foreground: 0 0% 83%;
-    --primary: 180 100% 25%;
+    --primary: 180 100% 25%; /* Teal */
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 20%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 64%;
-    --accent: 0 0% 20%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 0 0% 82.7%; /* Light Gray */
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 22%;

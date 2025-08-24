@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Section, SectionTitle } from "@/components/section-wrapper";
 import {
   Card,
@@ -25,21 +24,21 @@ export function ProjectsSection() {
       <SectionTitle>Featured Projects</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.slice(0, 6).map((project) => (
-          <Card key={project.slug} className="flex flex-col overflow-hidden group transition-transform duration-300 hover:scale-105 hover:shadow-xl">
+          <Card key={project.slug} className="flex flex-col overflow-hidden group transition-all duration-300 hover:scale-105 hover:shadow-xl">
             <CardHeader className="p-0">
               <Link href={project.link} className="block relative h-48 w-full overflow-hidden">
                 <Image
                   src={project.image}
                   alt={`Screenshot of ${project.title}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300 group-hover:scale-110"
                   data-ai-hint={project.imageHint}
                 />
               </Link>
             </CardHeader>
             <CardContent className="p-6 flex-grow">
               <CardTitle className="mb-2">
-                <Link href={project.link}>{project.title}</Link>
+                <Link href={project.link} className="hover:text-primary transition-colors">{project.title}</Link>
               </CardTitle>
               <CardDescription>{project.description}</CardDescription>
             </CardContent>
