@@ -6,7 +6,7 @@
     "title": "Scholarship Management System",
     "description": "Developed a comprehensive platform using Next.js to streamline scholarship applications, reviews, and approvals, enhancing accessibility for students and administrators.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "education platform",
+    "imageHint": "education scholarship",
     "tags": ["Next.js", "Node.js", "Web Development", "Education"],
     "category": "web app",
     "github": "https://github.com/shadil-rayyan/ScholarshipMangementSystem"
@@ -17,7 +17,7 @@
     "title": "Repeto",
     "description": "Created a dynamic platform to aggregate recurring opportunities like scholarships, hackathons, research positions, and internships, empowering users to discover and track opportunities effortlessly.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "opportunity platform",
+    "imageHint": "career opportunity",
     "tags": ["Next.js", "Node.js", "Web Development", "Opportunities"],
     "category": "web app",
     "github": "https://github.com/CodeCompasss/code_compass_india"
@@ -28,7 +28,7 @@
     "title": "GECian Archive",
     "description": "Developed a dedicated platform for GEC Palakkad students to showcase and archive their projects, fostering a culture of collaboration and innovation within the institution.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "student archive",
+    "imageHint": "student project",
     "tags": ["Next.js", "Node.js", "Web Development", "Education"],
     "category": "web app",
     "github": "https://github.com/CodeCompasss/gecian_archive"
@@ -39,7 +39,7 @@
     "title": "Kerala Food Spot",
     "description": "Developed a Telegram bot to guide users to authentic dishes and restaurants in Kozhikode city, enhancing culinary exploration for locals and tourists alike.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "food bot",
+    "imageHint": "indian food",
     "tags": ["Python", "Telebot", "Telegram", "Culinary"],
     "category": "Bots and Packages",
     "github": "https://github.com/rishavchanda/Podstreamkk"
@@ -50,7 +50,7 @@
     "title": "Kerala Tourist Spot",
     "description": "Created a platform to highlight famous and hidden tourist spots in Kerala, providing travelers with curated information to enrich their travel experiences.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "tourism travel",
+    "imageHint": "kerala travel",
     "tags": ["Python", "Telebot", "Telegram", "Travel"],
     "category": "Bots and Packages",
     "github": "https://github.com/rishavchanda/Project-Management-App"
@@ -72,7 +72,7 @@
     "title": "Check Power of 2",
     "description": "Developed an NPM package that efficiently determines if a number is a power of 2, providing developers with a reliable utility for mathematical computations.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "npm package",
+    "imageHint": "coding developer",
     "tags": ["Node.js", "NPM", "Mathematics", "Utility"],
     "category": "Bots and Packages",
     "github": "https://github.com/shadil-rayyan/check_power_of_two_npm_package"
@@ -83,7 +83,7 @@
     "title": "Nemini Electric Website",
     "description": "Customized an HTML template to create a professional website for Nemini Electric, enhancing their online presence and accessibility to customers.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "business website",
+    "imageHint": "business electrician",
     "tags": ["HTML", "CSS", "Web Development", "Business"],
     "category": "web app",
     "github": "https://github.com/shadil-rayyan/nenmini-electric_website"
@@ -105,7 +105,7 @@
     "title": "Ethical Hacking Guide",
     "description": "Compiled a repository containing curated videos and concise notes to facilitate learning in ethical hacking, developed under the cybersecurity club.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "cybersecurity guide",
+    "imageHint": "cybersecurity hacking",
     "tags": ["Cybersecurity", "Education", "Resources", "Ethical Hacking"],
     "category": "Bots and Packages",
     "github": "https://github.com/shadil-rayyan/EthicalHackingGuide"
@@ -116,7 +116,7 @@
     "title": "Face Shape Predictor",
     "description": "Developed a machine learning model to predict face shapes, enhancing applications in personalized recommendations and virtual try-on systems.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "machine learning face",
+    "imageHint": "ai face",
     "tags": ["Streamlit", "machine learning", "Computer Vision", "AI"],
     "category": "machine learning",
     "github": "https://github.com/shadil-rayyan/face-shape-detector"
@@ -127,7 +127,7 @@
     "title": "Tech Expert",
     "description": "Developed a Telegram bot that actively shares great tech deals during sales festivals, assisting users in making informed purchasing decisions.",
     "image": "https://placehold.co/600x400.png",
-    "imageHint": "telegram bot",
+    "imageHint": "tech deals",
     "tags": ["Python", "Telegram Bot", "E-commerce", "Deals"],
     "category": "Bots and Packages",
     "github": ""
