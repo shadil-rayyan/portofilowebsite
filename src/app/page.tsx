@@ -9,6 +9,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { Footer } from "@/components/footer";
 import { TechStackSection } from "@/components/sections/tech-stack-section";
 import { BackToTop } from "@/components/back-to-top";
+import { CodeCompassSection } from "@/components/sections/code-compass-section";
 
 export default function Home() {
   return (
@@ -16,11 +17,12 @@ export default function Home() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
-        <EducationSection />
         <ExperienceSection />
-        <SkillsSection />
         <TechStackSection />
+        <SkillsSection />
         <ProjectsSection />
+        <CodeCompassSection />
+        <EducationSection />
         <ContactSection />
       </main>
       <Footer />
