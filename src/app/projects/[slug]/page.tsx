@@ -9,13 +9,16 @@ import { ArrowLeft, Github, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Project } from "@/lib/types";
 import allProjects from "@/data/projects.json";
+import type { Metadata } from 'next';
 
+// This function can't be used for metadata as it's client-side fetched.
+// For server-side metadata, you would use generateMetadata export.
+// But since this is a client component, we'll manage title with useEffect.
 async function getProjectDetails(slug: string): Promise<Project | undefined> {
     try {
         const project = allProjects.find(p => p.slug === slug);
         if (!project) return undefined;
         
-        // Mocking the long description fetch
         const details = await import(`@/data/projects/${slug}.json`);
         return { ...project, ...details };
 
@@ -37,12 +40,15 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
         const fetchedProject = await getProjectDetails(params.slug);
         if (fetchedProject) {
           setProject(fetchedProject);
+          document.title = `${fetchedProject.title} | Shadil AM`;
         } else {
           setError("Project not found.");
+          document.title = "Project Not Found | Shadil AM";
         }
       } catch (e) {
         console.error("Failed to fetch project", e);
         setError("Failed to load project data.");
+        document.title = "Error | Shadil AM";
       } finally {
         setIsLoading(false);
       }
@@ -97,8 +103,8 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
               </Button>
             )}
           </div>
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg bg-muted">
-            {project.video && (
+           {project.video && (
+             <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg bg-muted">
                 <video
                     src={project.video}
                     autoPlay
@@ -107,8 +113,8 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
                     playsInline
                     className="object-cover w-full h-full"
                 />
-            )}
-          </div>
+            </div>
+          )}
           <div className="prose prose-lg dark:prose-invert max-w-none mx-auto text-foreground/80 mb-12">
             <p>{project.longDescription}</p>
           </div>

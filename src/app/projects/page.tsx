@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -29,6 +29,10 @@ import allProjectsData from "@/data/projects.json";
 export default function ProjectsPage() {
   const [filter, setFilter] = useState("All");
 
+  useEffect(() => {
+    document.title = "All Projects | Shadil AM";
+  }, []);
+
   const categories = ["All", ...Array.from(new Set(allProjectsData.map(p => p.category)))];
 
   const filteredProjects =
@@ -41,8 +45,8 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project: Project) => (
               <Card key={project.slug} className="project-card-border flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-                {project.video && (
-                  <CardHeader className="p-0">
+                 <CardHeader className="p-0">
+                  {project.video && (
                     <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
                         <video
                             src={project.video}
@@ -53,8 +57,8 @@ export default function ProjectsPage() {
                             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
                         />
                     </Link>
+                  )}
                   </CardHeader>
-                )}
                 <CardContent className="p-6 flex-grow">
                   <CardTitle className="mb-2">
                     <Link href={`/projects/${project.slug}`} className="hover:text-primary transition-colors">{project.title}</Link>
