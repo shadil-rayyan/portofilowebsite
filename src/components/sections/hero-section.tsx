@@ -10,10 +10,10 @@ export function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter">
-              Hi, I'm a <span className="text-primary">Full-Stack Developer</span>
+              Full-Stack Developer
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              I specialize in building exceptional, high-quality websites and applications. Based in San Francisco, I'm passionate about creating modern, responsive, and user-friendly digital experiences.
+              I build fast, responsive, and user-friendly web applications that solve real-world problems and drive business growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg">
