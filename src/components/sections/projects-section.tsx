@@ -14,72 +14,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight } from "lucide-react";
-
-const projects = [
-  {
-    slug: "ecommerce-platform",
-    title: "E-commerce Platform",
-    description: "A full-featured e-commerce site built with Next.js, Stripe for payments, and a custom CMS for product management.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "online store",
-    link: "/projects/ecommerce-platform",
-    tags: ["Next.js", "React", "Stripe", "Tailwind CSS"],
-    category: "Web",
-  },
-  {
-    slug: "data-visualization-dashboard",
-    title: "Data Visualization Dashboard",
-    description: "An interactive dashboard for visualizing complex datasets using D3.js and React, enabling real-time data exploration.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "data dashboard",
-    link: "/projects/data-visualization-dashboard",
-    tags: ["React", "D3.js", "Node.js", "Express"],
-    category: "Web",
-  },
-  {
-    slug: "ai-content-generator",
-    title: "AI-Powered Content Generator",
-    description: "A web app that leverages generative AI to create marketing copy and blog posts, built with Python, Flask, and a React frontend.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "artificial intelligence",
-    link: "/projects/ai-content-generator",
-    tags: ["Python", "Flask", "React", "AI"],
-    category: "AI",
-  },
-  {
-    slug: "mobile-fitness-app",
-    title: "Mobile Fitness App",
-    description: "A cross-platform mobile app for tracking workouts and nutrition, built with React Native and Firebase.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "fitness app",
-    link: "/projects/mobile-fitness-app",
-    tags: ["React Native", "Firebase", "iOS", "Android"],
-    category: "Mobile",
-  },
-  {
-    slug: "project-management-tool",
-    title: "Project Management Tool",
-    description: "A collaborative tool for teams to manage tasks, projects, and deadlines, featuring a real-time Kanban board.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "kanban board",
-    link: "/projects/project-management-tool",
-    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
-    category: "Web",
-  },
-  {
-    slug: "iot-smart-home-system",
-    title: "IoT Smart Home System",
-    description: "A system to control smart home devices from a central dashboard, using Raspberry Pi, Node.js, and MQTT.",
-    image: "https://placehold.co/600x400.png",
-    imageHint: "smart home",
-    link: "/projects/iot-smart-home-system",
-    tags: ["IoT", "Raspberry Pi", "Node.js", "MQTT"],
-    category: "IoT",
-  },
-];
+import { ArrowRight, Github } from "lucide-react";
+import { allProjectsData } from "@/lib/projects-data";
 
 export function ProjectsSection() {
+  const projects = allProjectsData;
+
   return (
     <Section id="projects">
       <SectionTitle>Featured Projects</SectionTitle>
@@ -107,9 +47,17 @@ export function ProjectsSection() {
                 <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
                 </div>
-                <Button asChild className="mt-2">
-                    <Link href={project.link}>Read More</Link>
-                </Button>
+                <div className="flex items-center gap-4 mt-2">
+                    <Button asChild>
+                        <Link href={project.link}>Read More</Link>
+                    </Button>
+                     <Button asChild variant="outline">
+                      <Link href={project.githubLink} target="_blank">
+                        <Github className="mr-2 h-4 w-4" />
+                        GitHub
+                      </Link>
+                    </Button>
+                </div>
             </CardFooter>
           </Card>
         ))}
