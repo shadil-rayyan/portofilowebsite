@@ -44,7 +44,7 @@ export function HeroSection() {
           <div className="relative w-full max-w-sm mx-auto md:max-w-none md:mx-0">
             <Image
               src={heroData.image}
-              alt="Portrait of the developer"
+              alt="Portrait of Shadil AM"
               width={600}
               height={600}
               className="rounded-full object-cover shadow-2xl aspect-square"

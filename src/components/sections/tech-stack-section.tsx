@@ -18,7 +18,7 @@ export function TechStackSection() {
                 {category.stack.map((tech) => (
                   <div key={tech.name} className="flex flex-col items-center gap-2">
                     <div className="relative w-10 h-10">
-                        <Image src={tech.image} alt={tech.name} layout="fill" objectFit="contain" />
+                        <Image src={tech.image} alt={`Logo of ${tech.name}`} layout="fill" objectFit="contain" />
                     </div>
                     <span className="text-sm text-muted-foreground">{tech.name}</span>
                   </div>

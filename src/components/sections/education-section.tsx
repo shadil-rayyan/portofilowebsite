@@ -35,7 +35,7 @@ export function EducationSection() {
                   <CardDescription className="pt-1">{edu.school}</CardDescription>
                 </div>
                 <div className="p-2 bg-primary/10 rounded-full">
-                  <Image src={edu.img} alt={edu.school} width={40} height={40} className="rounded-full" />
+                  <Image src={edu.img} alt={`Logo of ${edu.school}`} width={40} height={40} className="rounded-full" />
                 </div>
               </div>
             </CardHeader>

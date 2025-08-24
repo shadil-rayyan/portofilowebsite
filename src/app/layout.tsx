@@ -4,8 +4,8 @@ import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'DevFolio',
-  description: 'A personal portfolio for developers.',
+  title: 'Shadil AM - Full Stack Developer',
+  description: 'The personal portfolio of Shadil AM, a full stack developer, software engineer, and data science enthusiast showcasing projects, experience, and skills.',
 };
 
 export default function RootLayout({
