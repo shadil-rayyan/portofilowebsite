@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { GraduationCap } from "lucide-react";
 import educationData from '@/data/education.json';
 import Image from "next/image";
 
@@ -26,7 +25,7 @@ export function EducationSection() {
   return (
     <Section id="education">
       <SectionTitle>My Education</SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {educationData.map((edu: EducationEntry) => (
           <Card key={edu.id} className="flex flex-col">
             <CardHeader>

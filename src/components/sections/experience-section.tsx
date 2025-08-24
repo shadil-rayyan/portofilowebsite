@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Briefcase } from "lucide-react";
 import experienceData from '@/data/experience.json';
-import Image from "next/image";
 
 interface ExperienceEntry {
   id: number;
@@ -26,7 +25,7 @@ export function ExperienceSection() {
   return (
     <Section id="experience">
       <SectionTitle>My Experience</SectionTitle>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {experienceData.map((exp: ExperienceEntry) => (
           <Card key={exp.id} className="flex flex-col">
             <CardHeader>
