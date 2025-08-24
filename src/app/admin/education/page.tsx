@@ -79,7 +79,8 @@ export default function AdminEducationPage() {
     try {
       if (entry.id) {
         const docRef = doc(db, 'education', entry.id);
-        await updateDoc(docRef, { ...entry });
+        const { id, ...dataToSave } = entry;
+        await updateDoc(docRef, dataToSave);
         toast({ title: 'Success!', description: 'Entry updated successfully.' });
       } else {
         await addDoc(collection(db, 'education'), entry);
@@ -124,7 +125,10 @@ export default function AdminEducationPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Manage Education</h1>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={isDialogOpen} onOpenChange={(isOpen) => {
+          setIsDialogOpen(isOpen);
+          if (!isOpen) setCurrentEntry(null);
+        }}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()}>
               <PlusCircle className="mr-2 h-4 w-4" />
@@ -194,6 +198,7 @@ function EducationForm({
   onClose: () => void;
 }) {
   const [formData, setFormData] = useState<EducationEntry>({
+    id: undefined,
     degree: '',
     institution: '',
     period: '',
@@ -205,6 +210,7 @@ function EducationForm({
       setFormData(entry);
     } else {
       setFormData({
+        id: undefined,
         degree: '',
         institution: '',
         period: '',

@@ -18,6 +18,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from '@/components/ui/card';
 import {
   Dialog,
@@ -66,18 +67,20 @@ export default function AdminProjectsPage() {
     return () => unsubscribe();
   }, []);
 
-  const handleSave = async (project: Omit<Project, 'id'>) => {
+  const handleSave = async (project: Omit<Project, 'id' | 'slug' | 'link'> & { id?: string }) => {
     setIsSaving(true);
     const slug = project.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-    const projectData = {...project, slug, link: `/projects/${slug}`};
+    const projectData = { ...project, slug, link: `/projects/${slug}` };
     
     try {
-      if (currentProject?.id) {
-        const docRef = doc(db, 'projects', currentProject.id);
-        await updateDoc(docRef, projectData);
+      if (project.id) {
+        const docRef = doc(db, 'projects', project.id);
+        const { id, ...dataToUpdate } = projectData;
+        await updateDoc(docRef, dataToUpdate);
         toast({ title: 'Success!', description: 'Project updated successfully.' });
       } else {
-        await addDoc(collection(db, 'projects'), projectData);
+        const { id, ...dataToAdd } = projectData;
+        await addDoc(collection(db, 'projects'), dataToAdd);
         toast({ title: 'Success!', description: 'Project added successfully.' });
       }
       setIsDialogOpen(false);
@@ -119,7 +122,10 @@ export default function AdminProjectsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Manage Projects</h1>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <Dialog open={isDialogOpen} onOpenChange={(isOpen) => {
+          setIsDialogOpen(isOpen);
+          if (!isOpen) setCurrentProject(null);
+        }}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()}>
               <PlusCircle className="mr-2 h-4 w-4" />
@@ -190,42 +196,35 @@ function ProjectForm({
   onClose,
 }: {
   project: Project | null;
-  onSave: (data: Omit<Project, 'id'|'slug'|'link'>) => void;
+  onSave: (data: Omit<Project, 'slug'|'link'>) => void;
   isSaving: boolean;
   onClose: () => void;
 }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Omit<Project, 'slug' | 'link'>>({
+    id: undefined,
     title: '',
     description: '',
     longDescription: '',
     image: '',
     imageHint: '',
     githubLink: '',
-    tags: '',
+    tags: [],
     category: '',
   });
 
   useEffect(() => {
     if (project) {
-      setFormData({
-        title: project.title,
-        description: project.description,
-        longDescription: project.longDescription,
-        image: project.image,
-        imageHint: project.imageHint,
-        githubLink: project.githubLink,
-        tags: project.tags.join(', '),
-        category: project.category,
-      });
+      setFormData(project);
     } else {
       setFormData({
+        id: undefined,
         title: '',
         description: '',
         longDescription: '',
         image: '',
         imageHint: '',
         githubLink: '',
-        tags: '',
+        tags: [],
         category: '',
       });
     }
@@ -236,12 +235,14 @@ function ProjectForm({
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setFormData((prev) => ({ ...prev, tags: value.split(',').map(tag => tag.trim()) }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave({
-        ...formData,
-        tags: formData.tags.split(',').map(tag => tag.trim()),
-    });
+    onSave(formData);
   };
 
   return (
@@ -276,7 +277,7 @@ function ProjectForm({
       </div>
       <div className="space-y-2">
         <Label htmlFor="tags">Tags (comma separated)</Label>
-        <Input id="tags" value={formData.tags} onChange={handleChange} placeholder="e.g. React, Next.js, AI" required />
+        <Input id="tags" value={Array.isArray(formData.tags) ? formData.tags.join(', ') : ''} onChange={handleTagsChange} placeholder="e.g. React, Next.js, AI" required />
       </div>
       <div className="flex justify-end gap-2 sticky bottom-0 bg-background py-4">
         <Button type="button" variant="ghost" onClick={onClose}>Cancel</Button>

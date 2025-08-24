@@ -13,7 +13,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
 import {toast} from '@/hooks/use-toast';
-import {getDoc, setDoc, doc} from 'firebase/firestore';
+import {onSnapshot, setDoc, doc} from 'firebase/firestore';
 import {db} from '@/lib/firebase';
 import {Loader2} from 'lucide-react';
 
@@ -33,27 +33,25 @@ export default function AdminHeroPage() {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
-    const fetchHeroData = async () => {
-      try {
-        const docRef = doc(db, 'content', 'hero');
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setHeroData(docSnap.data() as HeroData);
+    const docRef = doc(db, 'content', 'hero');
+    const unsubscribe = onSnapshot(docRef, (doc) => {
+        if (doc.exists()) {
+          setHeroData(doc.data() as HeroData);
         } else {
           console.log('No such document!');
         }
-      } catch (error) {
+        setIsLoading(false);
+    }, (error) => {
         console.error('Error fetching hero data:', error);
         toast({
           title: 'Error',
           description: 'Failed to fetch hero content.',
           variant: 'destructive',
         });
-      } finally {
         setIsLoading(false);
-      }
-    };
-    fetchHeroData();
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleSave = async () => {

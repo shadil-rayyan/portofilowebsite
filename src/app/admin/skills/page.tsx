@@ -17,6 +17,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from '@/components/ui/card';
 import {
   Dialog,
@@ -79,12 +80,13 @@ export default function AdminSkillsPage() {
     return () => unsubscribe();
   }, []);
 
-  const handleSave = async (skill: Omit<Skill, 'id'>) => {
+  const handleSave = async (skill: Omit<Skill, 'id'> & {id?: string}) => {
     setIsSaving(true);
     try {
-      if (currentSkill?.id) {
-        const docRef = doc(db, 'skills', currentSkill.id);
-        await updateDoc(docRef, skill);
+      if (skill.id) {
+        const docRef = doc(db, 'skills', skill.id);
+        const { id, ...dataToSave } = skill;
+        await updateDoc(docRef, dataToSave);
         toast({ title: 'Success!', description: 'Skill updated successfully.' });
       } else {
         await addDoc(collection(db, 'skills'), skill);
@@ -129,7 +131,10 @@ export default function AdminSkillsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Manage Skills</h1>
-         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+         <Dialog open={isDialogOpen} onOpenChange={(isOpen) => {
+            setIsDialogOpen(isOpen);
+            if (!isOpen) setCurrentSkill(null);
+         }}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()}>
                 <PlusCircle className="mr-2 h-4 w-4" />
@@ -199,11 +204,12 @@ function SkillForm({
   onClose,
 }: {
   skill: Skill | null;
-  onSave: (data: Omit<Skill, 'id'>) => void;
+  onSave: (data: Omit<Skill, 'id'> & {id?: string}) => void;
   isSaving: boolean;
   onClose: () => void;
 }) {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<Skill>({
+        id: undefined,
         title: '',
         description: '',
         icon: 'Code' as IconName,
@@ -214,6 +220,7 @@ function SkillForm({
       setFormData(skill);
     } else {
       setFormData({
+        id: undefined,
         title: '',
         description: '',
         icon: 'Code' as IconName,
