@@ -44,10 +44,13 @@ export function ContactSection() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    const subject = encodeURIComponent(`Message from ${values.name} via Portfolio`);
+    const body = encodeURIComponent(`${values.message}\n\nFrom: ${values.name} <${values.email}>`);
+    window.location.href = `mailto:${contactData.email}?subject=${subject}&body=${body}`;
+    
     toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
+      title: "Email Client Opened",
+      description: "Please use your email client to send the message.",
     });
     form.reset();
   }

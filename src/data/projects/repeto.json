@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "Repeto is a dynamic platform designed to aggregate recurring opportunities such as scholarships, hackathons, research positions, and internships. It empowers users to effortlessly discover, track, and apply for these opportunities. The platform includes features like personalized notifications, deadline tracking, and a comprehensive search filter to help students and professionals stay ahead in their careers."
+  "longDescription": "Repeto is a dynamic web platform designed to solve a common problem for students and professionals: finding and tracking recurring opportunities. It aggregates scholarships, hackathons, research positions, and internships into a single, searchable database. Built on the MERN stack (MongoDB, Express.js, React, Node.js), Repeto allows users to filter opportunities by category, eligibility, and deadlines. Key features include personalized email notifications for saved searches, deadline tracking, and a user dashboard to manage applications. It empowers users to stay organized and never miss an important opportunity."
 }

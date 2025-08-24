@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "The GECian Archive is a dedicated platform for students of GEC Palakkad to showcase and archive their academic and personal projects. By providing a centralized repository, it fosters a culture of collaboration, innovation, and knowledge sharing within the institution. Students can upload project details, source code, and presentations, creating a lasting digital legacy of their work."
+  "longDescription": "The GECian Archive is a web platform built to serve the students of GEC Palakkad. It provides a centralized, digital repository for them to showcase and archive their academic and personal projects. The goal is to foster a culture of collaboration, preserve institutional knowledge, and allow students to build a portfolio of their work. Built with Next.js and Node.js, the platform allows users to upload project details, link to source code, share presentations, and browse the work of their peers, creating a lasting digital legacy of innovation at the college."
 }

@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "This project involved developing a machine learning model to predict a person's face shape (e.g., oval, square, round) from an image. This technology has applications in personalized beauty and fashion recommendations, virtual try-on systems for glasses, and augmented reality filters. The model was built using computer vision techniques and a custom-trained classifier."
+  "longDescription": "This project leverages the power of machine learning and computer vision to predict a person's face shape (e.g., oval, square, round) from an image. Using Python, OpenCV, and Dlib for facial landmark detection, the model analyzes key facial proportions to make its prediction. The application is built with Streamlit, providing an interactive web interface where users can upload their photo and instantly receive their result. This technology has exciting applications in personalized beauty, fashion recommendations (e.g., suggesting flattering eyeglass frames), and augmented reality filters."
 }

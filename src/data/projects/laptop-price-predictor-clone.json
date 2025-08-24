@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "Following a detailed YouTube tutorial, I implemented a machine learning model to predict the price of laptops based on their specifications (CPU, RAM, storage, etc.). This project was a great exercise in understanding regression models, data preprocessing, and feature engineering, and it solidified my machine learning skills."
+  "longDescription": "Following a detailed YouTube tutorial, I built a machine learning model to predict the price of laptops. This project was a hands-on exercise in the end-to-end data science workflow. It involved data collection, extensive data preprocessing and cleaning, feature engineering to extract meaningful variables from raw specs (like CPU speed, RAM size, and storage type), and finally, training and evaluating several regression models. The final model is deployed in a user-friendly web application using Streamlit, where a user can input laptop specifications and receive an estimated price."
 }

@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "Tech Expert is a Telegram bot that actively monitors and shares great tech deals from various e-commerce sites during major sales festivals like Black Friday and Amazon Prime Day. It helps users make informed purchasing decisions by providing real-time alerts on discounts for gadgets and electronics."
+  "longDescription": "Tech Expert is a smart Telegram bot that acts as a personal deal-hunter for tech enthusiasts. It actively monitors major e-commerce sites like Amazon and Flipkart during big sales events like Black Friday and Prime Day. Using web scraping techniques, the bot identifies significant discounts on gadgets and electronics. When a great deal is found, it immediately sends a notification to the user with a direct link to the product, helping them make timely and informed purchasing decisions."
 }

@@ -1,4 +1,4 @@
 
 {
-  "longDescription": "Kerala Food Spot is a Telegram bot developed to guide users to authentic local dishes and renowned restaurants in Kozhikode city, a food lover's paradise. The bot offers recommendations based on user preferences, location, and cuisine type, enhancing the culinary exploration for both locals and tourists. It also features user reviews and ratings to help in making informed dining choices."
+  "longDescription": "Kerala Food Spot is a specialized Telegram bot designed to be the ultimate culinary guide for Kozhikode, a city renowned for its rich food culture. Developed using Python and the Telebot library, the bot helps users discover authentic local dishes and famous restaurants. It offers personalized recommendations based on cuisine type, location, and user ratings. The bot integrates with a simple database to store restaurant information and user reviews, making it an interactive and invaluable tool for both locals and tourists looking to explore the city's vibrant food scene."
 }
