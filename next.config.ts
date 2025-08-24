@@ -7,8 +7,7 @@ const repoName = 'shadil-portfolio';
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
-  basePath: isGithubActions ? `/${repoName}` : '',
-  assetPrefix: isGithubActions ? `/${repoName}/` : '',
+
 
   typescript: {
     ignoreBuildErrors: true,
