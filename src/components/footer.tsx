@@ -1,4 +1,4 @@
-import { Code, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import footerData from "@/data/footer.json";
 
@@ -9,7 +9,6 @@ export function Footer() {
     <footer className="bg-card border-t">
       <div className="container mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center">
         <div className="flex items-center gap-2 mb-4 sm:mb-0">
-          <Code className="w-6 h-6 text-primary" />
           <p className="text-sm text-muted-foreground">&copy; {currentYear} Shadil AM. All rights reserved.</p>
         </div>
         <div className="flex items-center gap-4">
