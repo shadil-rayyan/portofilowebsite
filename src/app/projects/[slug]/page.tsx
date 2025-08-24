@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Github, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -98,8 +97,8 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
               </Button>
             )}
           </div>
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
-            {project.video ? (
+          <div className="relative w-full h-64 md:h-96 mb-8 rounded-lg overflow-hidden shadow-lg bg-muted">
+            {project.video && (
                 <video
                     src={project.video}
                     autoPlay
@@ -107,14 +106,6 @@ export default function ProjectDetailsPage({ params }: { params: { slug: string 
                     muted
                     playsInline
                     className="object-cover w-full h-full"
-                />
-            ) : (
-                <Image
-                src={project.image}
-                alt={`Hero image for ${project.title}`}
-                fill
-                className="object-cover"
-                data-ai-hint={project.imageHint}
                 />
             )}
           </div>

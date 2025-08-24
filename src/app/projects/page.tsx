@@ -11,7 +11,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -43,8 +42,8 @@ export default function ProjectsPage() {
             {filteredProjects.map((project: Project) => (
               <Card key={project.slug} className="project-card-border flex flex-col overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                 <CardHeader className="p-0">
-                  <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden">
-                    {project.video ? (
+                  <Link href={`/projects/${project.slug}`} className="block relative h-48 w-full overflow-hidden bg-muted">
+                    {project.video && (
                         <video
                             src={project.video}
                             autoPlay
@@ -52,14 +51,6 @@ export default function ProjectsPage() {
                             muted
                             playsInline
                             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-                        />
-                    ) : (
-                        <Image
-                            src={project.image}
-                            alt={`Screenshot of ${project.title}`}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
-                            data-ai-hint={project.imageHint}
                         />
                     )}
                   </Link>
