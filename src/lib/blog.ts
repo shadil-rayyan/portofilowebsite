@@ -1,8 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-
-const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
+import { db } from './db';
+import { blogs } from './db/schema';
+import { desc, eq, and } from 'drizzle-orm';
 
 export interface BlogPost {
   slug: string;
@@ -16,58 +14,43 @@ export interface BlogPost {
 }
 
 export async function getAllPosts(): Promise<Omit<BlogPost, 'content'>[]> {
-  if (!fs.existsSync(BLOG_DIR)) {
-    return [];
-  }
+  const posts = await db.select({
+    slug: blogs.slug,
+    title: blogs.title,
+    date: blogs.createdAt,
+    description: blogs.description,
+    tags: blogs.tags,
+    image: blogs.image
+  })
+  .from(blogs)
+  .where(eq(blogs.published, true))
+  .orderBy(desc(blogs.createdAt));
 
-  const files = fs.readdirSync(BLOG_DIR);
-  
-  const posts = files
-    .filter((file) => file.endsWith('.md') || file.endsWith('.mdx'))
-    .map((file) => {
-      const filePath = path.join(BLOG_DIR, file);
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      const { data } = matter(fileContent);
-      
-      return {
-        slug: file.replace(/\.mdx?$/, ''),
-        title: data.title,
-        date: data.date,
-        description: data.description,
-        tags: data.tags || [],
-        image: data.image || null,
-        author: data.author || 'Shadil AM',
-      };
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return posts;
+  return posts.map(post => ({
+    ...post,
+    date: post.date ? post.date.toISOString() : new Date().toISOString(),
+    tags: post.tags ? JSON.parse(post.tags) : [],
+    description: post.description || "",
+    author: "Shadil AM"
+  }));
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
-  const mdPath = path.join(BLOG_DIR, `${slug}.md`);
-  const mdxPath = path.join(BLOG_DIR, `${slug}.mdx`);
-  
-  let filePath = '';
-  if (fs.existsSync(mdPath)) {
-    filePath = mdPath;
-  } else if (fs.existsSync(mdxPath)) {
-    filePath = mdxPath;
-  } else {
-    return null;
-  }
+  const [post] = await db.select()
+    .from(blogs)
+    .where(and(eq(blogs.slug, slug), eq(blogs.published, true)))
+    .limit(1);
 
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContent);
+  if (!post) return null;
 
   return {
-    slug,
-    title: data.title,
-    date: data.date,
-    description: data.description,
-    content,
-    tags: data.tags || [],
-    image: data.image || null,
-    author: data.author || 'Shadil AM',
+    slug: post.slug,
+    title: post.title,
+    date: post.createdAt ? post.createdAt.toISOString() : new Date().toISOString(),
+    description: post.description || "",
+    content: post.content,
+    tags: post.tags ? JSON.parse(post.tags) : [],
+    image: post.image || undefined,
+    author: "Shadil AM"
   };
 }
