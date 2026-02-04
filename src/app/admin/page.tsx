@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { validateRequest } from "@/lib/auth-utils";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db/index";
