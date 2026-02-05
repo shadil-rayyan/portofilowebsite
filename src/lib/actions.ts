@@ -40,12 +40,14 @@ export async function createBlogPost(prevState: any, formData: FormData) {
   const slug = formData.get("slug") as string;
   const description = formData.get("description") as string;
   const content = formData.get("content") as string;
-  const tags = formData.get("tags") as string;
+  const tagsRaw = formData.get("tags") as string;
   const published = formData.get("published") === "on";
 
   if (!title || !slug || !content) {
     return { error: "Missing required fields" };
   }
+
+  const tags = JSON.stringify(tagsRaw.split(",").map(t => t.trim()).filter(Boolean));
 
   try {
     await db.insert(blogs).values({
@@ -74,12 +76,14 @@ export async function updateBlogPost(prevState: any, formData: FormData) {
   const slug = formData.get("slug") as string;
   const description = formData.get("description") as string;
   const content = formData.get("content") as string;
-  const tags = formData.get("tags") as string;
+  const tagsRaw = formData.get("tags") as string;
   const published = formData.get("published") === "on";
 
   if (!id || !title || !slug || !content) {
     return { error: "Missing required fields" };
   }
+
+  const tags = JSON.stringify(tagsRaw.split(",").map(t => t.trim()).filter(Boolean));
 
   try {
     await db.update(blogs)
@@ -109,5 +113,308 @@ export async function deleteBlogPost(id: string) {
   await db.delete(blogs).where(eq(blogs.id, id));
   revalidatePath("/blog");
   revalidatePath("/admin");
+  return { success: true };
+}
+
+// Projects
+import { settings, projects, experience, skills, education, techStack } from "@/lib/db/schema";
+
+// Tech Stack
+export async function deleteTechStack(id: string) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+  await db.delete(techStack).where(eq(techStack.id, id));
+  revalidatePath("/");
+  revalidatePath("/admin/settings");
+  return { success: true };
+}
+
+export async function createTechStack(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const name = formData.get("name") as string;
+  const items = formData.get("items") as string;
+
+  try {
+    await db.insert(techStack).values({
+      id: nanoid(),
+      name,
+      items,
+    });
+    revalidatePath("/");
+    return redirect("/admin/settings");
+  } catch (e) {
+    return { error: "Error creating tech stack" };
+  }
+}
+
+export async function updateTechStack(formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const id = formData.get("id") as string;
+  const name = formData.get("name") as string;
+  const items = formData.get("items") as string;
+
+  try {
+    await db.update(techStack).set({ name, items }).where(eq(techStack.id, id));
+    revalidatePath("/");
+  } catch (e) {
+    console.error("Error updating tech stack:", e);
+  }
+  return redirect("/admin/settings");
+}
+
+export async function updateSettings(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const key = formData.get("key") as string;
+  const value = formData.get("value") as string;
+
+  try {
+    await db.insert(settings).values({
+      id: nanoid(),
+      key,
+      value,
+    }).onConflictDoUpdate({
+      target: settings.key,
+      set: { value, updatedAt: new Date() },
+    });
+    revalidatePath("/");
+    return { success: true };
+  } catch (e) {
+    return { error: "Error updating settings" };
+  }
+}
+
+export async function createProject(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const title = formData.get("title") as string;
+  const slug = formData.get("slug") as string;
+  const description = formData.get("description") as string;
+  const tagsRaw = formData.get("tags") as string;
+  const github = formData.get("github") as string;
+  const webapp = formData.get("webapp") as string;
+  const published = formData.get("published") === "on";
+
+  const tags = JSON.stringify(tagsRaw.split(",").map(t => t.trim()).filter(Boolean));
+
+  try {
+    await db.insert(projects).values({
+      id: nanoid(),
+      title,
+      slug,
+      description,
+      tags,
+      github,
+      webapp,
+      published,
+    });
+    revalidatePath("/");
+    return redirect("/admin/projects");
+  } catch (e) {
+    return { error: "Error creating project" };
+  }
+}
+
+export async function updateProject(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const id = formData.get("id") as string;
+  const title = formData.get("title") as string;
+  const slug = formData.get("slug") as string;
+  const description = formData.get("description") as string;
+  const tagsRaw = formData.get("tags") as string;
+  const github = formData.get("github") as string;
+  const webapp = formData.get("webapp") as string;
+  const published = formData.get("published") === "on";
+
+  const tags = JSON.stringify(tagsRaw.split(",").map(t => t.trim()).filter(Boolean));
+
+  try {
+    await db.update(projects).set({ title, slug, description, tags, github, webapp, published }).where(eq(projects.id, id));
+    revalidatePath("/");
+    return redirect("/admin/projects");
+  } catch (e) {
+    return { error: "Error updating project" };
+  }
+}
+
+export async function deleteProject(id: string) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+  await db.delete(projects).where(eq(projects.id, id));
+  revalidatePath("/");
+  revalidatePath("/admin/projects");
+  return { success: true };
+}
+
+// Experience
+export async function createExperience(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const company = formData.get("company") as string;
+  const position = formData.get("position") as string;
+  const location = formData.get("location") as string;
+  const period = formData.get("period") as string;
+  const description = formData.get("description") as string;
+
+  try {
+    await db.insert(experience).values({
+      id: nanoid(),
+      company,
+      position,
+      location,
+      period,
+      description,
+    });
+    revalidatePath("/");
+    return redirect("/admin/experience");
+  } catch (e) {
+    return { error: "Error creating experience" };
+  }
+}
+
+export async function updateExperience(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const id = formData.get("id") as string;
+  const company = formData.get("company") as string;
+  const position = formData.get("position") as string;
+  const location = formData.get("location") as string;
+  const period = formData.get("period") as string;
+  const description = formData.get("description") as string;
+
+  try {
+    await db.update(experience).set({ company, position, location, period, description }).where(eq(experience.id, id));
+    revalidatePath("/");
+    return redirect("/admin/experience");
+  } catch (e) {
+    return { error: "Error updating experience" };
+  }
+}
+
+export async function deleteExperience(id: string) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+  await db.delete(experience).where(eq(experience.id, id));
+  revalidatePath("/");
+  revalidatePath("/admin/experience");
+  return { success: true };
+}
+
+// Skills
+export async function createSkill(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const title = formData.get("title") as string;
+  const category = formData.get("category") as string;
+  const icon = formData.get("icon") as string;
+
+  try {
+    await db.insert(skills).values({
+      id: nanoid(),
+      title,
+      category,
+      icon,
+    });
+    revalidatePath("/");
+    return redirect("/admin/skills");
+  } catch (e) {
+    return { error: "Error creating skill" };
+  }
+}
+
+export async function updateSkill(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const id = formData.get("id") as string;
+  const title = formData.get("title") as string;
+  const category = formData.get("category") as string;
+  const icon = formData.get("icon") as string;
+
+  try {
+    await db.update(skills).set({ title, category, icon }).where(eq(skills.id, id));
+    revalidatePath("/");
+    return redirect("/admin/skills");
+  } catch (e) {
+    return { error: "Error updating skill" };
+  }
+}
+
+export async function deleteSkill(id: string) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+  await db.delete(skills).where(eq(skills.id, id));
+  revalidatePath("/");
+  revalidatePath("/admin/skills");
+  return { success: true };
+}
+
+// Education
+export async function createEducation(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const school = formData.get("school") as string;
+  const degree = formData.get("degree") as string;
+  const period = formData.get("period") as string;
+  const grade = formData.get("grade") as string;
+  const description = formData.get("description") as string;
+  const image = formData.get("image") as string;
+
+  try {
+    await db.insert(education).values({
+      id: nanoid(),
+      school,
+      degree,
+      period,
+      grade,
+      description,
+      image,
+    });
+    revalidatePath("/");
+    return redirect("/admin/education");
+  } catch (e) {
+    return { error: "Error creating education" };
+  }
+}
+
+export async function updateEducation(prevState: any, formData: FormData) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+
+  const id = formData.get("id") as string;
+  const school = formData.get("school") as string;
+  const degree = formData.get("degree") as string;
+  const period = formData.get("period") as string;
+  const grade = formData.get("grade") as string;
+  const description = formData.get("description") as string;
+  const image = formData.get("image") as string;
+
+  try {
+    await db.update(education).set({ school, degree, period, grade, description, image }).where(eq(education.id, id));
+    revalidatePath("/");
+    return redirect("/admin/education");
+  } catch (e) {
+    return { error: "Error updating education" };
+  }
+}
+
+export async function deleteEducation(id: string) {
+  const { session } = await validateRequest();
+  if (!session) return { error: "Unauthorized" };
+  await db.delete(education).where(eq(education.id, id));
+  revalidatePath("/");
+  revalidatePath("/admin/education");
   return { success: true };
 }

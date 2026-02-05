@@ -1,5 +1,3 @@
-'use client';
-
 import { Section, SectionTitle } from "@/components/section-wrapper";
 import {
   Card,
@@ -8,25 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import educationData from '@/data/education.json';
 import Image from "next/image";
+import { db } from "@/lib/db/index";
+import { education } from "@/lib/db/schema";
 
-interface EducationEntry {
-  id: number;
-  img: string;
-  school: string;
-  date: string;
-  grade: string;
-  desc: string;
-  degree: string;
-}
+export async function EducationSection() {
+  const educationData = await db.select().from(education);
 
-export function EducationSection() {
   return (
     <Section id="education">
       <SectionTitle>My Education</SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {educationData.map((edu: EducationEntry) => (
+        {educationData.map((edu) => (
           <Card key={edu.id} className="flex flex-col">
             <CardHeader>
               <div className="flex items-start justify-between">
@@ -35,13 +26,13 @@ export function EducationSection() {
                   <CardDescription className="pt-1">{edu.school}</CardDescription>
                 </div>
                 <div className="p-2 bg-primary/10 rounded-full">
-                  <Image src={edu.img} alt={`Logo of ${edu.school}`} width={40} height={40} className="rounded-full" />
+                  {edu.image && <Image src={edu.image} alt={`Logo of ${edu.school}`} width={40} height={40} className="rounded-full" />}
                 </div>
               </div>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p className="text-sm text-muted-foreground mb-4">{edu.date} • {edu.grade}</p>
-              <p className="text-foreground/80">{edu.desc}</p>
+              <p className="text-sm text-muted-foreground mb-4">{edu.period} {edu.grade ? `• ${edu.grade}` : ""}</p>
+              <p className="text-foreground/80">{edu.description}</p>
             </CardContent>
           </Card>
         ))}

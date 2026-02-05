@@ -1,14 +1,7 @@
-
-import type {NextConfig} from 'next';
-
-const isGithubActions = process.env.GITHUB_ACTIONS === 'true'
-const repoName = 'portofilowebsite';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  basePath: isGithubActions ? `/${repoName}` : '',
-  assetPrefix: isGithubActions ? `/${repoName}/` : '',
-
   typescript: {
     ignoreBuildErrors: true,
   },

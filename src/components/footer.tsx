@@ -1,9 +1,17 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import footerData from "@/data/footer.json";
+import { db } from "@/lib/db/index";
+import { settings } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
-export function Footer() {
+export async function Footer() {
   const currentYear = new Date().getFullYear();
+  const [footerSetting] = await db.select().from(settings).where(eq(settings.key, "footer")).limit(1);
+  const footerData = footerSetting ? JSON.parse(footerSetting.value) : {
+    email: "test@example.com",
+    github: "#",
+    linkedin: "#"
+  };
 
   return (
     <footer className="bg-card border-t">

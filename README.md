@@ -1,59 +1,53 @@
-# Shadil AM - Full Stack Developer Portfolio
+# 🚀 Shadil AM - Full Stack Portfolio (Pro Edition)
 
-This repository contains the source code for my personal portfolio website, designed to showcase my skills, projects, and professional experience as a Full Stack Developer. The site is built with Next.js and Tailwind CSS, and it is deployed using GitHub Pages.
+A high-performance, fully-managed personal portfolio website built with **Next.js 15**, **Neon PostgreSQL**, and **Firebase Auth**.
 
-## ✨ Features
+Check out the **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** for a detailed walkthrough on how to set this up for yourself!
 
-- **Responsive Design**: Fully responsive layout that looks great on desktops, tablets, and mobile devices.
-- **Dynamic Content**: Project, experience, and education data are loaded from JSON files, making content updates easy.
-- **Featured Projects**: A dedicated section on the homepage to highlight key projects.
-- **All Projects Page**: A comprehensive page with filtering capabilities to browse all my work.
-- **Detailed Project Views**: Each project has its own page with a long description, tags, and a link to the GitHub repository.
-- **Interactive UI**: Smooth animations and transitions for a modern user experience.
-- **Dark/Light Mode**: Theme toggling for user preference.
-- **Automated Deployment**: The site is automatically deployed to GitHub Pages on every push to the `main` branch using GitHub Actions.
+## ✨ New Features
+- **🏠 Fully Dynamic**: No more editing JSON files. Manage your entire site via a beautiful Admin Dashboard.
+- **🔐 Admin Dashboard**: Secure Google Login using Firebase Authentication to manage your content.
+- **✍️ Blog System**: Full-featured blog with Markdown/MDX support.
+- **🗃️ Database Powered**: All projects, experience, education, and skills are stored in a Neon PostgreSQL database.
+- **⚙️ Site Settings**: Update your profile name, roles, bio, and social links directly from the admin panel.
+- **🌗 Modern UI**: Premium aesthetics with Glassmorphism, smooth animations, and tailored color palettes.
 
 ## 🛠️ Tech Stack
-
-- **Framework**: [Next.js](https://nextjs.org/)
+- **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
+- **Database**: [Neon PostgreSQL](https://neon.tech/)
+- **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
+- **Auth**: [Firebase Authentication](https://firebase.google.com/) (Admin SDK)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
-- **Icons**: [Lucide React](https://lucide.dev/guide/packages/lucide-react)
-- **Deployment**: [GitHub Pages](https://pages.github.com/) & [GitHub Actions](https://github.com/features/actions)
+- **Components**: [Shadcn UI](https://ui.shadcn.com/)
 
 ## 🚀 Getting Started
 
-To run this project locally, follow these steps:
+To get the site running locally:
 
-1.  **Clone the repository:**
+1.  **Clone & Install**:
     ```bash
-    git clone https://github.com/Shadil-rayyan/shadil-portfolio.git
-    cd shadil-portfolio
-    ```
-
-2.  **Install dependencies:**
-    ```bash
+    git clone <your-repo-url>
+    cd portofilowebsite
     npm install
     ```
 
-3.  **Run the development server:**
+2.  **Environment Variables**:
+    Create a `.env` file and add your `DATABASE_URL` and Firebase keys (see `SETUP_GUIDE.md`).
+
+3.  **Database Migration**:
+    ```bash
+    npx drizzle-kit push
+    npm run db:migrate-data # Only if you want to import initial JSON data
+    ```
+
+4.  **Run Dev**:
     ```bash
     npm run dev
     ```
 
-    Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
+## 📖 Important Documentation
+- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)**: How to set up Neon, Firebase, and deploy to Netlify/Vercel.
+- **[ADMIN_GUIDE.md](./ADMIN_GUIDE.md)**: How to use the admin dashboard.
 
-## 🔧 Configuration for GitHub Pages
-
-Deploying a Next.js static export to GitHub Pages requires specific configuration. Here’s how it's set up in this project:
-
--   **`next.config.ts`**:
-    -   `output: 'export'`: This enables the static HTML export feature of Next.js.
-    -   `basePath` & `assetPrefix`: These are set dynamically based on whether the build is running in a GitHub Actions environment. This ensures that all assets (CSS, JS, images) are loaded correctly from the repository's subdirectory on GitHub Pages (e.g., `/shadil-portfolio/`).
-    -   `images: { unoptimized: true }`: Next.js Image Optimization is not supported in a static export environment. This setting disables it to prevent errors.
-
--   **GitHub Actions Workflow (`.github/workflows/deploy.yml`)**:
-    -   This workflow triggers on pushes to the `main` branch.
-    -   It builds the Next.js application using `npm run build`.
-    -   The resulting static files from the `out` directory are uploaded as a GitHub Pages artifact.
-    -   A separate `deploy` job takes this artifact and deploys it to the `gh-pages` branch, making it live.
+## 🛡️ License
+MIT

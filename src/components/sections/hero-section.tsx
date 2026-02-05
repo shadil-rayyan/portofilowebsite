@@ -1,14 +1,25 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Github, Linkedin } from 'lucide-react';
-import heroData from '@/data/hero.json';
-import footerData from '@/data/footer.json';
-import { Typewriter } from 'react-simple-typewriter';
+import { TypewriterWrapper } from '@/components/typewriter-wrapper';
+import { db } from '@/lib/db/index';
+import { settings } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
 
-export function HeroSection() {
+export async function HeroSection() {
+  const [heroSetting] = await db.select().from(settings).where(eq(settings.key, "hero")).limit(1);
+  const [footerSetting] = await db.select().from(settings).where(eq(settings.key, "footer")).limit(1);
+  
+  const heroData = heroSetting ? JSON.parse(heroSetting.value) : {
+    name: "SHADIL AM",
+    roles: ["Backend Developer", "Software Development"],
+    description: "I am a motivated and versatile individual...",
+    image: "./shadil.jpeg",
+  };
+  
+  const footerData = footerSetting ? JSON.parse(footerSetting.value) : {};
+
   return (
     <section className="py-24 md:py-32 lg:py-40 bg-card">
       <div className="container mx-auto px-4">
@@ -18,15 +29,7 @@ export function HeroSection() {
               Hi, I'm {heroData.name}
             </h1>
             <div className="text-2xl md:text-3xl text-primary font-semibold h-10">
-              <Typewriter
-                words={heroData.roles}
-                loop={0}
-                cursor
-                cursorStyle='_'
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
-              />
+              <TypewriterWrapper words={heroData.roles} />
             </div>
             <p className="text-lg md:text-xl text-muted-foreground">
               {heroData.description}
@@ -43,10 +46,10 @@ export function HeroSection() {
                     </Button>
                 </div>
                 <div className="flex items-center justify-start gap-4 mt-2">
-                    <Link href={footerData.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Link href={footerData.github || "#"} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="text-muted-foreground hover:text-primary transition-colors">
                         <Github className="w-6 h-6" />
                     </Link>
-                    <Link href={footerData.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
+                    <Link href={footerData.linkedin || "#"} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
                         <Linkedin className="w-6 h-6" />
                     </Link>
                 </div>
@@ -55,7 +58,7 @@ export function HeroSection() {
           <div className="relative w-full max-w-sm mx-auto md:max-w-none md:mx-0">
             <Image
               src={heroData.image}
-              alt="Portrait of Shadil AM"
+              alt={`Portrait of ${heroData.name}`}
               width={600}
               height={600}
               className="rounded-full object-cover shadow-2xl aspect-square"

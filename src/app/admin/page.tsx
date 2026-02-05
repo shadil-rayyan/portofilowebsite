@@ -1,102 +1,58 @@
 export const dynamic = "force-dynamic";
 
-import { validateRequest } from "@/lib/auth-utils";
-import { redirect } from "next/navigation";
 import { db } from "@/lib/db/index";
-import { blogs } from "@/lib/db/schema";
-import { Button } from "@/components/ui/button";
-import { Header } from "@/components/header";
-import Link from "next/link";
-import { Plus, LogOut, FileText } from "lucide-react";
-import { logout, deleteBlogPost } from "@/lib/actions";
-import { revalidatePath } from "next/cache";
+import { blogs, projects, experience, skills } from "@/lib/db/schema";
+import { count } from "drizzle-orm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { FileText, Briefcase, Cpu, FolderOpen } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const { user, session } = await validateRequest();
-  if (!session) {
-    return redirect("/admin/login");
-  }
+  const [blogCount] = await db.select({ value: count() }).from(blogs);
+  const [projectCount] = await db.select({ value: count() }).from(projects);
+  const [expCount] = await db.select({ value: count() }).from(experience);
+  const [skillCount] = await db.select({ value: count() }).from(skills);
 
-  const allBlogs = await db.select().from(blogs).orderBy(blogs.createdAt);
+  const stats = [
+    { label: "Blog Posts", value: blogCount.value, icon: FileText, color: "text-blue-500" },
+    { label: "Projects", value: projectCount.value, icon: FolderOpen, color: "text-purple-500" },
+    { label: "Experience", value: expCount.value, icon: Briefcase, color: "text-green-500" },
+    { label: "Skills", value: skillCount.value, icon: Cpu, color: "text-orange-500" },
+  ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-grow container mx-auto px-4 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back, {user.username}</p>
-          </div>
-          <div className="flex gap-4">
-            <Button asChild>
-              <Link href="/admin/blog/new">
-                <Plus className="mr-2 h-4 w-4" /> New Post
-              </Link>
-            </Button>
-              <form action={async () => {
-              "use server";
-              await logout();
-            }}>
-              <Button variant="outline" type="submit">
-                <LogOut className="mr-2 h-4 w-4" /> Logout
-              </Button>
-            </form>
-          </div>
-        </div>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+        <p className="text-muted-foreground mt-2">Manage your website content from here.</p>
+      </div>
 
-        <div className="grid gap-6">
-          <h2 className="text-xl font-semibold flex items-center">
-            <FileText className="mr-2 h-5 w-5 text-primary" /> Manage Posts
-          </h2>
-          {allBlogs.length === 0 ? (
-            <div className="text-center py-12 border-2 border-dashed rounded-lg bg-card">
-              <p className="text-muted-foreground">No posts yet. Create your first one!</p>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <Card key={stat.label} className="border-2 hover:shadow-lg transition-all transform-gpu hover:-translate-y-1">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">{stat.label}</CardTitle>
+                <Icon className={`h-4 w-4 ${stat.color}`} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stat.value}</div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+         {/* Could add quick links or recent activity here later */}
+         <Card className="p-6">
+            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <div className="grid grid-cols-2 gap-4">
+                <a href="/admin/blog/new" className="p-4 border rounded-lg hover:bg-muted text-center transition-colors">New Blog Post</a>
+                <a href="/admin/projects" className="p-4 border rounded-lg hover:bg-muted text-center transition-colors">Manage Projects</a>
             </div>
-          ) : (
-            <div className="border rounded-lg overflow-hidden bg-card">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b bg-muted/50">
-                    <th className="p-4 font-medium">Title</th>
-                    <th className="p-4 font-medium">Status</th>
-                    <th className="p-4 font-medium">Date</th>
-                    <th className="p-4 font-medium text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {allBlogs.map((blog: any) => (
-                    <tr key={blog.id} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
-                      <td className="p-4 font-medium">{blog.title}</td>
-                      <td className="p-4">
-                        {blog.published ? (
-                          <span className="text-xs bg-green-500/10 text-green-500 px-2 py-1 rounded-full font-medium">Published</span>
-                        ) : (
-                          <span className="text-xs bg-yellow-500/10 text-yellow-500 px-2 py-1 rounded-full font-medium">Draft</span>
-                        )}
-                      </td>
-                      <td className="p-4 text-sm text-muted-foreground">
-                        {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString() : 'N/A'}
-                      </td>
-                      <td className="p-4 text-right flex justify-end gap-2">
-                        <Button variant="ghost" size="sm" asChild>
-                          <Link href={`/admin/blog/edit/${blog.id}`}>Edit</Link>
-                        </Button>
-                        <form action={async () => {
-                          "use server";
-                          await deleteBlogPost(blog.id);
-                        }}>
-                          <Button variant="ghost" size="sm" className="text-destructive hover:text-destructive hover:bg-destructive/10">Delete</Button>
-                        </form>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </main>
+         </Card>
+      </div>
     </div>
   );
 }

@@ -19,7 +19,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import contactData from "@/data/contact.json";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,7 +32,15 @@ const formSchema = z.object({
   }),
 });
 
-export function ContactSection() {
+interface ContactSectionProps {
+  data: {
+    email: string;
+    description: string;
+    linkedin: string;
+  };
+}
+
+export function ContactSection({ data }: ContactSectionProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +53,7 @@ export function ContactSection() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const subject = encodeURIComponent(`Message from ${values.name} via Portfolio`);
     const body = encodeURIComponent(`${values.message}\n\nFrom: ${values.name} <${values.email}>`);
-    window.location.href = `mailto:${contactData.email}?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${data.email}?subject=${subject}&body=${body}`;
     
     toast({
       title: "Email Client Opened",
@@ -112,14 +119,14 @@ export function ContactSection() {
         <div className="space-y-6">
             <h3 className="text-xl font-semibold">Contact Information</h3>
             <p className="text-muted-foreground">
-                {contactData.description}
+                {data.description}
             </p>
             <div className="space-y-4">
-                <Link href={`mailto:${contactData.email}`} className="flex items-center gap-3 group">
+                <Link href={`mailto:${data.email}`} className="flex items-center gap-3 group">
                     <Mail className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    <span className="text-muted-foreground group-hover:text-primary transition-colors">{contactData.email}</span>
+                    <span className="text-muted-foreground group-hover:text-primary transition-colors">{data.email}</span>
                 </Link>
-                <Link href={contactData.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
+                <Link href={data.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
                     <Linkedin className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                     <span className="text-muted-foreground group-hover:text-primary transition-colors">LinkedIn Profile</span>
                 </Link>

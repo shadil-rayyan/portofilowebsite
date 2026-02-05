@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/sections/hero-section";
 import { EducationSection } from "@/components/sections/education-section";
@@ -10,8 +12,18 @@ import { Footer } from "@/components/footer";
 import { TechStackSection } from "@/components/sections/tech-stack-section";
 import { BackToTop } from "@/components/back-to-top";
 import { CodeCompassSection } from "@/components/sections/code-compass-section";
+import { db } from "@/lib/db/index";
+import { settings } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
 export default async function Home() {
+  const [contactSetting] = await db.select().from(settings).where(eq(settings.key, "contact")).limit(1);
+  const contactData = contactSetting ? JSON.parse(contactSetting.value) : {
+      email: "test@example.com",
+      description: "Available for new projects...",
+      linkedin: "#"
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -24,7 +36,7 @@ export default async function Home() {
         <ProjectsSection />
         <BlogSection />
         <EducationSection />
-        <ContactSection />
+        <ContactSection data={contactData} />
       </main>
       <Footer />
       <BackToTop />
